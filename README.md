@@ -1,2 +1,2 @@
 # ari-typescript-examples
-Asterisk Restfull Interface TypeScript Examples
+Asterisk REST Interface TypeScript Examples
