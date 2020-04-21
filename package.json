@@ -1,0 +1,54 @@
+{
+    "name": "ari-typescript-examples",
+    "version": "1.0.0",
+    "description": "Asterisk REST Interface TypeScript Examples",
+    "main": "jest.config.js",
+    "directories": {
+        "test": "tests"
+    },
+    "dependencies": {
+        "app-root-path": "^3.0.0",
+        "ari-client": "^2.2.0",
+        "dotenv": "^8.2.0",
+        "events": "^3.1.0",
+        "fs": "0.0.1-security",
+        "lodash": "^4.17.15",
+        "path": "^0.12.7",
+        "util": "^0.12.2",
+        "uuid": "^7.0.3",
+        "ws": "^7.2.3"
+    },
+    "scripts": {
+        "tsc": "tsc",
+        "test": "jest --verbose --watchAll --runInBand --detectOpenHandles --config jestconfig.json",
+        "dev": "ts-node-dev --transpileOnly src/app.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dioris-moreno/ari-typescript-examples.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dioris-moreno/ari-typescript-examples/issues"
+    },
+    "homepage": "https://github.com/dioris-moreno/ari-typescript-examples#readme",
+    "devDependencies": {
+        "@types/app-root-path": "^1.2.4",
+        "@types/ari-client": "^2.2.0",
+        "@types/debug": "^4.1.5",
+        "@types/events": "^3.0.0",
+        "@types/jest": "^25.2.1",
+        "@types/lodash": "^4.14.149",
+        "@types/node": "^13.11.1",
+        "@types/uuid": "^7.0.2",
+        "@types/ws": "^7.2.4",
+        "jest": "^25.3.0",
+        "supertest": "^4.0.2",
+        "ts-jest": "^25.3.1",
+        "ts-node": "^8.8.2",
+        "ts-node-dev": "^1.0.0-pre.44",
+        "typescript": "^3.8.3"
+    }
+}

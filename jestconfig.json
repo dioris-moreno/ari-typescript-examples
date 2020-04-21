@@ -1,0 +1,9 @@
+{
+    "roots": ["<rootDir>"],
+    "transform": {
+        "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testPathIgnorePatterns": ["/tests/data/"],
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}
