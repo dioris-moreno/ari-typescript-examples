@@ -33,11 +33,21 @@ Examples in folder src/examples are divided into callbacks and promises. The cal
 the examples published on https://github.com/asterisk/node-ari-client using callback functions. The promises folder contains the
 TypeScript version of the same examples, but using promises and async/await syntax.
 
-```sh
-+-- examples
-| +-- callbacks
-| +-- promises
-```
+    examples
+    ├── callbacks               # Examples using callback functions.
+    │   ├── bridge.ts
+    │   ├── deviceState.ts
+    │   ├── example.ts
+    │   ├── mwi.ts
+    │   ├── originate.ts
+    │   └── playback.ts
+    └── promises                # Examples using promises with async/await syntax.
+        ├── bridge.ts
+        ├── deviceState.ts
+        ├── example.ts
+        ├── mwi.ts
+        ├── originate.ts
+        └── playback.ts
 
 You can run any of these examples by executing the command:
 
@@ -46,7 +56,16 @@ npm run dev example-file [promises/callbacks]
 ```
 
 Just replace "example-file" with the name of the example file you want to run (bridge, mwi, etc.), followed by the corresponding
-version (promises or callbacks). By default promises versions are run if no version parameter is passed.
+version (promises or callbacks). By default promises versions are run if no version parameter is passed. For example, to run
+the bridge example, callbacks version, execute:
+
+```sh
+npm run dev bridge callbacks
+```
+
+### Debugging
+
+The examples use debug module, so you can just add debug() wherever you want to see what is happening.
 
 ### TypeScript
 
