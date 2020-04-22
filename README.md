@@ -18,7 +18,7 @@ ARI_PASSWORD=password
 These parameters can be easily retrieved by importing src/config.ts:
 
 ```javascript
-import { url, username, password } from '../src/config';
+import { url, username, password } from './config';
 ```
 
 > Note: in order to setup your Asterisk to use ARI, follow the instructions in https://wiki.asterisk.org/wiki/display/AST/Asterisk+Configuration+for+ARI.
