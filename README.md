@@ -39,31 +39,35 @@ TypeScript version of the same examples, but using promises and async/await synt
 | +-- promises
 ```
 
-You can run any of these examples executing the command:
+You can run any of these examples by executing the command:
 
 ```sh
-npm run dev [example] [promises/callbacks]
+npm run dev example-file [promises/callbacks]
 ```
 
-, where [example] is the name of the example file (bridge, mwi, etc.) followed by the corresponding version (promises or callbacks).
-By default promises versions are run.
+Just replace "example-file" with the name of the example file you want to run (bridge, mwi, etc.), followed by the corresponding
+version (promises or callbacks). By default promises versions are run if no version parameter is passed.
 
 ### TypeScript
 
 This project uses TypeScript definitions (@types/ari-client) for the ari-client Node.js module.
-Now you can import resources from the library as follows.
+In TypeScript you can import resources from the library as follows.
 
 ```typescript
 import Ari, { Channel, Bridge } from 'ari-client';
 ```
 
-Default module export Ari exposes the connect() function. You can connect to an Asterisk instance as follows:
+Default module export "Ari" exposes the connect() function. You can connect to an Asterisk instance as follows:
 
 ```typescript
 // Using promises (async/await).
 const client = await Ari.connect(url, username, password);
-// Using callback.
-Ari.connect(url, username, password, (err, client) => {});
+console.log(`Now connected to ${url}`);
+
+// Using a callback function.
+Ari.connect(url, username, password, (err, client) => {
+    console.log(`Now connected to ${url}`);
+});
 ```
 
 ## Running Test
