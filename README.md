@@ -8,7 +8,7 @@ This project includes TypeScript versions of the examples published on project h
 It uses the TypeScript definitions @types/ari-client for the ari-client Node.js module. The purpose of the @types/ari-client
 definitions and these examples is to facilitate the development of applications based on ARI.
 
-### Configuration
+## Configuration
 
 Before running any example or tests, you have to create a .env file at the root of the project and set the
 URL and credentials of the development Asterisk box you want to connect to.
@@ -56,27 +56,35 @@ npm run dev example-file [promises/callbacks]
 ```
 
 Just replace "example-file" with the name of the example file you want to run (bridge, mwi, etc.), followed by the corresponding
-version (promises or callbacks). By default promises versions are run if no version parameter is passed. For example, to run
-the bridge example, callbacks version, execute:
+version (promises or callbacks). By default promises versions are run.
+If you want to run the callbacks version of the bridge example, execute:
 
 ```sh
 npm run dev bridge callbacks
 ```
 
+If you want to run the promises version of the originate example, execute:
+
+```sh
+npm run dev originate
+```
+
 ### Debugging
 
-The examples use debug module, so you can just add debug() wherever you want to see what is happening.
+The examples use the debug module, so you can just add debug() wherever you want to see what is happening.
 
-### TypeScript
+## @types/ari-client
 
-This project uses TypeScript definitions (@types/ari-client) for the ari-client Node.js module.
-In TypeScript you can import resources from the library as follows.
+This project uses TypeScript definitions @types/ari-client for the ari-client Node.js module.
+Using these definitions you can import in TypeScript resources from the library as follows.
 
 ```typescript
 import Ari, { Channel, Bridge } from 'ari-client';
 ```
 
-Default module export "Ari" exposes the connect() function. You can connect to an Asterisk instance as follows:
+> Note: you have to turn on esModuleInterop option in tsconfig.json in order to destructured import Asterisk objects (Channel, Bridge, Endpoint, etc.).
+
+Default module export exposes the connect() function, so you can connect to an Asterisk instance as follows:
 
 ```typescript
 // Using promises (async/await).
@@ -91,7 +99,7 @@ Ari.connect(url, username, password, (err, client) => {
 
 ## Running Test
 
-You can run a series of tests against the Asterisk instance defined in .env file as follows:
+You can also run a series of tests against the Asterisk instance defined in .env file as follows:
 
 ```sh
 npm run test
