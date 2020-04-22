@@ -72,6 +72,14 @@ npm run dev originate
 ### Debugging
 
 The examples use the debug module, so you can just add debug() wherever you want to see what is happening.
+Be sure to add DEBUG=\* to your .env file.
+
+```sh
+ARI_URL=http://127.0.0.1:8888/ari
+ARI_USERNAME=username
+ARI_PASSWORD=password
+DEBUG=*
+```
 
 ## @types/ari-client
 
