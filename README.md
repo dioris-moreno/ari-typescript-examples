@@ -27,6 +27,25 @@ These parameters can be easily retrieved by importing src/config.ts:
 import { url, username, password } from '../src/config';
 ```
 
+## Running Examples
+
+Examples in folder src/examples are organized in callbacks and promises. The callbacks folder includes the TypeScript versions of
+the examples published on https://github.com/asterisk/node-ari-client, using callback functions. The promises folder contains the
+TypeScript version of the same examples, but using promises and async/await syntax.
+
++-- examples
+| +-- callbacks
+| +-- promises
+
+You can run any of these examples executing the command:
+
+```sh
+npm run dev [example] [promises/callbacks]
+```
+
+, where [example] is the name of the example file (bridge, mwi, etc.) followed by the corresponding version (promises or callbacks).
+By default promises versions are run.
+
 ### TypeScript
 
 This project uses TypeScript definitions (@types/ari-client) for the ari-client Node.js module.
@@ -45,9 +64,9 @@ const client = await Ari.connect(url, username, password);
 Ari.connect(url, username, password, (err, client) => {});
 ```
 
-## Test
+## Running Test
 
-You can run a series of tests against the Asterisk instance defined in .env as follows:
+You can run a series of tests against the Asterisk instance defined in .env file as follows:
 
 ```sh
 npm run test
@@ -62,7 +81,7 @@ If you receive warnings like the following when running tests, it is because the
     No channels found to check Channel object.
 ```
 
-In src/fixtures folder you can find the ARI resource files of an Asterisk 16.4.0 server. As explained in node-ari-client
+You can find in src/fixtures folder the ARI resource files of an Asterisk 16.4.0. As explained in node-ari-client
 documentation (https://github.com/asterisk/node-ari-client/blob/master/README.md), fixtures for ARI resources can be
 generated from a local Asterisk instance by running the following:
 
