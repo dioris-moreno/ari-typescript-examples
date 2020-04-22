@@ -2,14 +2,16 @@
 
 Asterisk REST Interface TypeScript Examples
 
-## Usage
+## Introduction
 
 This project includes TypeScript versions of the examples published on project https://github.com/asterisk/node-ari-client.
-This project uses TypeScript definitions (@types/ari-client) for the ari-client Node.js module.
+It uses the TypeScript definitions @types/ari-client for the ari-client Node.js module. The purpose of the @types/ari-client
+definitions and these examples is to facilitate the development of applications based on ARI.
 
 ### Configuration
 
-Set Asterisk instance url and credentials in order to run tests.
+Before running any example or tests, you have to create a .env file at the root of the project and set the
+URL and credentials of the development Asterisk box you want to connect to.
 
 ```sh
 ARI_URL=http://127.0.0.1:8888/ari
@@ -17,7 +19,9 @@ ARI_USERNAME=username
 ARI_PASSWORD=password
 ```
 
-These parameters could be easily retrieve by importing src/config.ts:
+You can find information about Asterisk Configuration for ARI in https://wiki.asterisk.org/wiki/display/AST/Asterisk+Configuration+for+ARI.
+
+These parameters can be easily retrieved by importing src/config.ts:
 
 ```javascript
 import { url, username, password } from '../src/config';
@@ -43,22 +47,22 @@ Ari.connect(url, username, password, (err, client) => {});
 
 ## Test
 
-You can run a series of test against the Asterisk instance defined in .env as follows:
+You can run a series of tests against the Asterisk instance defined in .env as follows:
 
 ```sh
 npm run test
 ```
 
-IMPORTANT: Do not run these tests against a production Asterisk box.
+#### IMPORTANT: Do not run these tests against a production Asterisk box.
 
-You could receive warnings like the following when running tests. It is because channels, bridges, endpoints, etc., list is empty.
+If you receive warnings like the following when running tests, it is because the corresponding Asterisk primitive object list is empty.
 
 ```sh
   console.warn
     No channels found to check Channel object.
 ```
 
-This project includes ARI resource files (src/fixtures) from an Asterisk 16.4.0 server. As explained in node-ari-client
+In src/fixtures folder you can find the ARI resource files of an Asterisk 16.4.0 server. As explained in node-ari-client
 documentation (https://github.com/asterisk/node-ari-client/blob/master/README.md), fixtures for ARI resources can be
 generated from a local Asterisk instance by running the following:
 
@@ -66,4 +70,4 @@ generated from a local Asterisk instance by running the following:
 $ grunt genfixtures
 ```
 
-These files are only used during tests to verify that objects received from Asterisk have the expected properties.
+These files are only used during tests to verify that objects received from the Asterisk box have the expected properties.
