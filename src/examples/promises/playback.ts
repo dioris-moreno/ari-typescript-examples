@@ -2,9 +2,10 @@ import Ari, { Channel, Playback } from 'ari-client';
 import { url, username, password } from '../../config';
 import util = require('util');
 import Debug from 'debug';
-const debug = Debug('ari-examples');
+const appName = 'playback-example';
+const debug = Debug(appName);
 
-// TypeScript Promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
+// TypeScript promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
 
 export default async () => {
     try {
@@ -49,7 +50,7 @@ export default async () => {
             });
         };
 
-        client.start('playback-example');
+        client.start(appName);
     } catch (err) {
         debug(err);
     }

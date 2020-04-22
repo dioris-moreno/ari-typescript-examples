@@ -1,11 +1,17 @@
 import Ari, { Channel, Playback } from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
+import Debug from 'debug';
+const appName = 'playback-example';
+const debug = Debug(appName);
 
 // TypeScript callback version of example published on project https://github.com/asterisk/node-ari-client.
 
 // replace ari.js with your Asterisk instance
 Ari.connect(url, username, password, (err, client) => {
+    if (err) return debug(err);
+    debug(`Connected to ${url}`);
+
     // Use once to start the application
     client.once('StasisStart', (event, incoming) => {
         incoming.answer(err => {
@@ -51,5 +57,5 @@ Ari.connect(url, username, password, (err, client) => {
     };
 
     // can also use client.start(['app-name'...]) to start multiple applications
-    client.start('playback-example');
+    client.start(appName);
 });

@@ -4,7 +4,7 @@ import Debug from 'debug';
 const appName = 'bridge-example';
 const debug = Debug(appName);
 
-// TypeScript Promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
+// TypeScript promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
 
 export default async () => {
     try {

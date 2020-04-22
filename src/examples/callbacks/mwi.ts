@@ -1,13 +1,19 @@
 import Ari from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
+import Debug from 'debug';
+const appName = 'mwi-example';
+const debug = Debug(appName);
 
 // TypeScript callback version of example published on project https://github.com/asterisk/node-ari-client.
 
 // replace ari.js with your Asterisk instance
 Ari.connect(url, username, password, (err, client) => {
+    if (err) return debug(err);
+    debug(`Connected to ${url}`);
+
     // Create new mailbox
-    const mailbox = client.Mailbox('mwi-example');
+    const mailbox = client.Mailbox(appName);
     let messages = 0;
 
     client.on(
@@ -98,5 +104,5 @@ Ari.connect(url, username, password, (err, client) => {
     );
 
     // can also use client.start(['app-name'...]) to start multiple applications
-    client.start('mwi-example');
+    client.start(appName);
 });

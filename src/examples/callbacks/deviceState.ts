@@ -1,6 +1,9 @@
 import Ari from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
+import Debug from 'debug';
+const appName = 'device-state-example';
+const debug = Debug(appName);
 
 // TypeScript callback version of example published on project https://github.com/asterisk/node-ari-client.
 
@@ -8,6 +11,9 @@ const BRIDGE_STATE = 'device-state-example';
 
 // replace ari.js with your Asterisk instance
 Ari.connect(url, username, password, (err, client) => {
+    if (err) return debug(err);
+    debug(`Connected to ${url}`);
+
     const bridge = client.Bridge();
     // Keep track of bridge state at the application level so we don't have to
     // make extra calls to ARI
@@ -53,5 +59,5 @@ Ari.connect(url, username, password, (err, client) => {
     });
 
     // can also use client.start(['app-name'...]) to start multiple applications
-    client.start('device-state-example');
+    client.start(appName);
 });

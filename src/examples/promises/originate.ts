@@ -1,9 +1,10 @@
 import Ari, { Channel } from 'ari-client';
 import { url, username, password } from '../../config';
 import Debug from 'debug';
-const debug = Debug('ari-examples');
+const appName = 'originate-example';
+const debug = Debug(appName);
 
-// TypeScript Promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
+// TypeScript promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
 
 export default async () => {
     try {
@@ -47,13 +48,13 @@ export default async () => {
             // Originate call from incoming channel to endpoint
             await outgoing.originate({
                 endpoint: ENDPOINT,
-                app: 'originate-example',
+                app: appName,
                 appArgs: 'dialed',
             });
         };
 
-        client.start('originate-example');
+        client.start(appName);
     } catch (err) {
-        console.error(err);
+        debug(err);
     }
 };

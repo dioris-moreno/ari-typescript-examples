@@ -1,9 +1,15 @@
 import Ari, { Channel, Bridge, ChannelLeftBridge } from 'ari-client';
 import { url, username, password } from '../../config';
+import Debug from 'debug';
+const appName = 'bridge-example';
+const debug = Debug(appName);
 
 // TypeScript callback version of example published on project https://github.com/asterisk/node-ari-client.
 
 Ari.connect(url, username, password, (err, client) => {
+    if (err) return debug(err);
+    debug(`Connected to ${url}`);
+
     // use once to start the application
     client.on('StasisStart', (event, incoming) => {
         incoming.answer(err => {

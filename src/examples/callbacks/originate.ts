@@ -1,5 +1,8 @@
 import Ari, { Channel, Containers } from 'ari-client';
 import { url, username, password } from '../../config';
+import Debug from 'debug';
+const appName = 'originate-example';
+const debug = Debug(appName);
 
 // TypeScript callback version of example published on project https://github.com/asterisk/node-ari-client.
 
@@ -7,6 +10,9 @@ const ENDPOINT = 'PJSIP/sipphone';
 
 // replace ari.js with your Asterisk instance
 Ari.connect(url, username, password, (err, client) => {
+    if (err) return debug(err);
+    debug(`Connected to ${url}`);
+
     // Use once to start the application to ensure this listener will only run
     // for the incoming channel
     client.once('StasisStart', (event, incoming) => {
@@ -45,12 +51,9 @@ Ari.connect(url, username, password, (err, client) => {
 
         // Originate call from incoming channel to endpoint
         const variables: Containers = { 'CALLERID(name)': 'Alice', name: 'test' };
-        outgoing.originate(
-            { endpoint: ENDPOINT, app: 'originate-example', appArgs: 'dialed', variables },
-            (err, channel) => {},
-        );
+        outgoing.originate({ endpoint: ENDPOINT, app: appName, appArgs: 'dialed', variables }, (err, channel) => {});
     };
 
     // can also use client.start(['app-name'...]) to start multiple applications
-    client.start('originate-example');
+    client.start(appName);
 });

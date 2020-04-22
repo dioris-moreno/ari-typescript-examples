@@ -2,9 +2,10 @@ import Ari, { Channel } from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
 import Debug from 'debug';
-const debug = Debug('ari-examples');
+const appName = 'example';
+const debug = Debug(appName);
 
-// TypeScript Promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
+// TypeScript promises (async/await) version of the example published on project https://github.com/asterisk/node-ari-client.
 
 export default async () => {
     try {
@@ -20,7 +21,7 @@ export default async () => {
                     case '#':
                         await play(channel, 'sound:vm-goodbye');
                         await channel.hangup();
-                        process.exit(0);
+                        // process.exit(0);
                         break;
                     case '*':
                         await play(channel, 'sound:tt-monkeys');
@@ -36,12 +37,10 @@ export default async () => {
 
         const play = (channel: Channel, sound: string) => {
             const playback = client.Playback();
-
             return new Promise((resolve, reject) => {
                 playback.once('PlaybackFinished', (event, playback) => {
                     resolve(playback);
                 });
-
                 channel.play({ media: sound }, playback).catch(err => {
                     reject(err);
                 });
@@ -49,8 +48,8 @@ export default async () => {
         };
 
         // can also use client.start(['app-name'...]) to start multiple applications
-        client.start('example');
+        client.start(appName);
     } catch (err) {
-        console.error(err);
+        debug(err);
     }
 };
