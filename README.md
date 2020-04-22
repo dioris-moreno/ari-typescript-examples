@@ -1,12 +1,8 @@
 # ari-typescript-examples
 
-Asterisk REST Interface TypeScript Examples
-
-## Introduction
-
-This project includes TypeScript versions of the examples published on project https://github.com/asterisk/node-ari-client.
-It uses the TypeScript definitions @types/ari-client for the ari-client Node.js module. The purpose of the @types/ari-client
-definitions and these examples is to facilitate the development of applications based on ARI.
+This project includes TypeScript versions of the examples published on project https://github.com/asterisk/node-ari-client for
+the Asterisk REST Interface. It uses the TypeScript definitions @types/ari-client for the ari-client Node.js module.
+The purpose of the @types/ari-client definitions and these examples is to facilitate the development of applications based on ARI.
 
 ## Configuration
 
