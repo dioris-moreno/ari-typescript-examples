@@ -19,23 +19,25 @@ ARI_USERNAME=username
 ARI_PASSWORD=password
 ```
 
-You can find information about Asterisk Configuration for ARI in https://wiki.asterisk.org/wiki/display/AST/Asterisk+Configuration+for+ARI.
-
 These parameters can be easily retrieved by importing src/config.ts:
 
 ```javascript
 import { url, username, password } from '../src/config';
 ```
 
+> Note: in order to setup your Asterisk to use ARI, follow the instructions in https://wiki.asterisk.org/wiki/display/AST/Asterisk+Configuration+for+ARI.
+
 ## Running Examples
 
-Examples in folder src/examples are organized in callbacks and promises. The callbacks folder includes the TypeScript versions of
-the examples published on https://github.com/asterisk/node-ari-client, using callback functions. The promises folder contains the
+Examples in folder src/examples are divided into callbacks and promises. The callbacks folder contains the TypeScript versions of
+the examples published on https://github.com/asterisk/node-ari-client using callback functions. The promises folder contains the
 TypeScript version of the same examples, but using promises and async/await syntax.
 
+```sh
 +-- examples
 | +-- callbacks
 | +-- promises
+```
 
 You can run any of these examples executing the command:
 
