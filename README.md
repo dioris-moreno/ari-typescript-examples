@@ -118,7 +118,7 @@ If you receive warnings like the following when running tests, it is because the
     No channels found to check Channel object.
 ```
 
-You can find in src/fixtures folder the ARI resource files of an Asterisk 16.4.0. As explained in node-ari-client
+You can find in src/fixtures folder the ARI resource files of an Asterisk 16.9. As explained in node-ari-client
 documentation (https://github.com/asterisk/node-ari-client/blob/master/README.md), fixtures for ARI resources can be
 generated from a local Asterisk instance by running the following:
 

@@ -28,8 +28,8 @@
         "url": "git+https://github.com/dioris-moreno/ari-typescript-examples.git"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Dioris Moreno",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/dioris-moreno/ari-typescript-examples/issues"
     },

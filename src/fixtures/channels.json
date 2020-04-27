@@ -4,7 +4,7 @@
   "_svn_revision": "$Revision$",
   "apiVersion": "2.0.0",
   "swaggerVersion": "1.1",
-  "basePath": "http://localhost:8088/ari",
+  "basePath": "http://pbxa.lsvon.net:8088/ari",
   "resourcePath": "/api-docs/channels.{format}",
   "requiresModules": [
     "res_stasis_answer",
@@ -828,7 +828,11 @@
               "defaultValue": "both",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["both", "in", "out"]
+                "values": [
+                  "both",
+                  "in",
+                  "out"
+                ]
               }
             }
           ],
@@ -871,7 +875,11 @@
               "defaultValue": "both",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["both", "in", "out"]
+                "values": [
+                  "both",
+                  "in",
+                  "out"
+                ]
               }
             }
           ],
@@ -1327,7 +1335,11 @@
               "defaultValue": "fail",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["fail", "overwrite", "append"]
+                "values": [
+                  "fail",
+                  "overwrite",
+                  "append"
+                ]
               }
             },
             {
@@ -1349,7 +1361,12 @@
               "defaultValue": "none",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["none", "any", "*", "#"]
+                "values": [
+                  "none",
+                  "any",
+                  "*",
+                  "#"
+                ]
               }
             }
           ],
@@ -1493,7 +1510,12 @@
               "defaultValue": "none",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["none", "both", "out", "in"]
+                "values": [
+                  "none",
+                  "both",
+                  "out",
+                  "in"
+                ]
               }
             },
             {
@@ -1506,7 +1528,12 @@
               "defaultValue": "none",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["none", "both", "out", "in"]
+                "values": [
+                  "none",
+                  "both",
+                  "out",
+                  "in"
+                ]
               }
             },
             {
@@ -1584,7 +1611,12 @@
               "defaultValue": "none",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["none", "both", "out", "in"]
+                "values": [
+                  "none",
+                  "both",
+                  "out",
+                  "in"
+                ]
               }
             },
             {
@@ -1597,7 +1629,12 @@
               "defaultValue": "none",
               "allowableValues": {
                 "valueType": "LIST",
-                "values": ["none", "both", "out", "in"]
+                "values": [
+                  "none",
+                  "both",
+                  "out",
+                  "in"
+                ]
               }
             },
             {
@@ -1706,6 +1743,131 @@
             {
               "code": 404,
               "reason": "Channel cannot be found."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/channels/externalMedia",
+      "description": "Create a channel to an External Media source/sink.",
+      "operations": [
+        {
+          "httpMethod": "POST",
+          "summary": "Start an External Media session.",
+          "notes": "Create a channel to an External Media source/sink.",
+          "nickname": "externalMedia",
+          "responseClass": "Channel",
+          "parameters": [
+            {
+              "name": "channelId",
+              "description": "The unique id to assign the channel on creation.",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string"
+            },
+            {
+              "name": "app",
+              "description": "Stasis Application to place channel into",
+              "paramType": "query",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string"
+            },
+            {
+              "name": "variables",
+              "description": "The \"variables\" key in the body object holds variable key/value pairs to set on the channel on creation. Other keys in the body object are interpreted as query parameters. Ex. { \"endpoint\": \"SIP/Alice\", \"variables\": { \"CALLERID(name)\": \"Alice\" } }",
+              "paramType": "body",
+              "required": false,
+              "dataType": "containers",
+              "allowMultiple": false
+            },
+            {
+              "name": "external_host",
+              "description": "Hostname/ip:port of external host",
+              "paramType": "query",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string"
+            },
+            {
+              "name": "encapsulation",
+              "description": "Payload encapsulation protocol",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "defaultValue": "rtp",
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "rtp"
+                ]
+              }
+            },
+            {
+              "name": "transport",
+              "description": "Transport protocol",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "defaultValue": "udp",
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "udp"
+                ]
+              }
+            },
+            {
+              "name": "connection_type",
+              "description": "Connection type (client/server)",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "defaultValue": "client",
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "client"
+                ]
+              }
+            },
+            {
+              "name": "format",
+              "description": "Format to encode audio in",
+              "paramType": "query",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string"
+            },
+            {
+              "name": "direction",
+              "description": "External media direction",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "defaultValue": "both",
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "both"
+                ]
+              }
+            }
+          ],
+          "errorResponses": [
+            {
+              "code": 400,
+              "reason": "Invalid parameters"
+            },
+            {
+              "code": 409,
+              "reason": "Channel is not in a Stasis application; Channel is already bridged"
             }
           ]
         }

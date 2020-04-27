@@ -4,9 +4,11 @@
   "_svn_revision": "$Revision$",
   "apiVersion": "2.0.0",
   "swaggerVersion": "1.1",
-  "basePath": "http://localhost:8088/ari",
+  "basePath": "http://pbxa.lsvon.net:8088/ari",
   "resourcePath": "/api-docs/mailboxes.{format}",
-  "requiresModules": ["res_stasis_mailbox"],
+  "requiresModules": [
+    "res_stasis_mailbox"
+  ],
   "apis": [
     {
       "path": "/mailboxes",
