@@ -36,7 +36,7 @@
     "homepage": "https://github.com/dioris-moreno/ari-typescript-examples#readme",
     "devDependencies": {
         "@types/app-root-path": "^1.2.4",
-        "@types/ari-client": "^2.2.0",
+        "@types/ari-client": "^2.2.1",
         "@types/debug": "^4.1.5",
         "@types/events": "^3.0.0",
         "@types/jest": "^25.2.1",
