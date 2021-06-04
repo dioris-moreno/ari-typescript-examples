@@ -15,11 +15,13 @@ export default async () => {
         debug(`Connected to ${url}`);
 
         const bridge = client.Bridge();
+
         // Keep track of bridge state at the application level so we don't have to
         // make extra calls to ARI
         let currentBridgeState = 'NOT_INUSE';
 
-        const instance = await bridge.create({ type: 'mixing' });
+        // const instance = await bridge.create({ type: 'mixing' });
+        await bridge.create({ type: 'mixing' });
 
         // Mark this bridge as available
         const opts = {

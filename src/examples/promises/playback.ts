@@ -23,6 +23,8 @@ export default async () => {
 
         const registerDtmfListeners = (playback: Playback, incoming: Channel) => {
             incoming.on('ChannelDtmfReceived', async (event, channel) => {
+                debug('incoming.on ChannelDtmfReceived channel:', channel);
+
                 const digit = event.digit;
                 switch (digit) {
                     case '5':
@@ -44,6 +46,7 @@ export default async () => {
                         await playback.control({ operation: 'stop' });
                         await incoming.hangup();
                         process.exit(0);
+                        break;
                     default:
                         debug(util.format('Unknown DTMF %s', digit));
                 }

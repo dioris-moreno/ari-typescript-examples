@@ -32,7 +32,7 @@ export default class FixturesHelper {
     /* Private Methods */
     private getRequiredPropertyKeys(properties: any) {
         const requiredProps = [];
-        for (let key of _.keys(properties)) {
+        for (const key of _.keys(properties)) {
             let { required } = properties[key];
             if (required === undefined) required = true;
             if (required) requiredProps.push(key);
@@ -42,6 +42,7 @@ export default class FixturesHelper {
 
     private readJsonFile = (folder: string, file: string) => {
         const filePath = path.join(appRoot.path, folder, file);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const json = require(filePath);
         return json;
     };

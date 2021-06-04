@@ -13,6 +13,8 @@ Ari.connect(url, username, password, (err, client) => {
     // use once to start the application
     client.on('StasisStart', (event, incoming) => {
         incoming.answer(err => {
+            if (err) return debug('incoming.answer error:', err);
+
             getOrCreateBridge(incoming);
         });
     });
@@ -42,13 +44,14 @@ Ari.connect(url, username, password, (err, client) => {
     const cleanupBridge = (event: ChannelLeftBridge, instances: ChannelLeftBridge, bridge: Bridge) => {
         const holdingBridge = instances.bridge;
         if (holdingBridge.channels.length === 0 && holdingBridge.id === bridge.id) {
-            bridge.destroy(err => {});
+            bridge.destroy(err => debug('startMoh error:', err));
         }
     };
 
     const joinHoldingBridgeAndPlayMoh = (bridge: Bridge, channel: Channel) => {
         bridge.addChannel({ channel: channel.id }, err => {
-            channel.startMoh(err => {});
+            debug('addChannel error:', err);
+            channel.startMoh(err => debug('startMoh error:', err));
         });
     };
 

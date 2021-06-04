@@ -11,6 +11,7 @@ const main = async () => {
             const example = process.argv[2];
             if (process.argv.length >= 4) version = process.argv[3];
             const filePath = `./examples/${version}/${example}`;
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const app = require(filePath);
             debug(`Running ${filePath}...`);
             await app.default();

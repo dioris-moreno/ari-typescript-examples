@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import Ari from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
@@ -28,20 +29,32 @@ Ari.connect(url, username, password, (err, client) => {
                         const recording = client.LiveRecording();
 
                         recording.once('RecordingFinished', (event, newRecording) => {
+                            debug('recording.once RecordingFinished event:', event);
+                            debug('recording.once RecordingFinished newRecording:', newRecording);
+
                             const playback = client.Playback();
                             playback.once('PlaybackFinished', (event, newPlayback) => {
+                                debug('playback.once PlaybackFinished event:', event);
+                                debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                                 // Update MWI
                                 messages += 1;
                                 const opts = {
                                     oldMessages: 0,
                                     newMessages: messages,
                                 };
-                                mailbox.update(opts, err => {});
+                                mailbox.update(opts, err => {
+                                    if (err) return debug('mailbox.update error:', err);
+                                });
 
-                                channel.hangup(err => {});
+                                channel.hangup(err => {
+                                    if (err) return debug('channel.hangup error:', err);
+                                });
                             });
 
-                            channel.play({ media: 'sound:vm-msgsaved' }, playback, err => {});
+                            channel.play({ media: 'sound:vm-msgsaved' }, playback, err => {
+                                if (err) return debug('channel.play error:', err);
+                            });
                         });
 
                         const opts = {
@@ -52,7 +65,9 @@ Ari.connect(url, username, password, (err, client) => {
                         };
 
                         // Record a message
-                        channel.record(opts, recording, err => {});
+                        channel.record(opts, recording, err => {
+                            if (err) return debug('channel.record error:', err);
+                        });
                         break;
                     case '6':
                         // Playback last message
@@ -61,20 +76,31 @@ Ari.connect(url, username, password, (err, client) => {
                             const recording = recordings[recordings.length - 1];
 
                             if (!recording) {
-                                channel.play({ media: 'sound:vm-nomore' }, playback, err => {});
+                                channel.play({ media: 'sound:vm-nomore' }, playback, err => {
+                                    if (err) return debug('channel.play error:', err);
+                                });
                             } else {
                                 playback.once('PlaybackFinished', (event, newPlayback) => {
+                                    debug('playback.once PlaybackFinished event:', event);
+                                    debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                                     recording.deleteStored(err => {
+                                        if (err) return debug('recording.deleteStored error:', err);
+
                                         // Remove MWI
                                         messages -= 1;
                                         const opts = {
                                             oldMessages: 0,
                                             newMessages: messages,
                                         };
-                                        mailbox.update(opts, err => {});
+                                        mailbox.update(opts, err => {
+                                            if (err) return debug('mailbox.update error:', err);
+                                        });
 
                                         const playback = client.Playback();
-                                        channel.play({ media: 'sound:vm-next' }, playback, err => {});
+                                        channel.play({ media: 'sound:vm-next' }, playback, err => {
+                                            if (err) return debug('channel.play error:', err);
+                                        });
                                     });
                                 });
 
@@ -83,7 +109,9 @@ Ari.connect(url, username, password, (err, client) => {
                                 };
 
                                 // Play the latest message
-                                channel.play(opts, playback, err => {});
+                                channel.play(opts, playback, err => {
+                                    if (err) return debug('channel.play error:', err);
+                                });
                             }
                         });
                         break;
@@ -91,14 +119,25 @@ Ari.connect(url, username, password, (err, client) => {
             });
 
             channel.answer(err => {
+                if (err) return debug('channel.answer error:', err);
+
                 let playback = client.Playback();
 
                 playback.once('PlaybackFinished', (err, newPlayback) => {
+                    if (err) return debug('playback.once PlaybackFinished error:', err);
+
+                    debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                     playback = client.Playback();
-                    channel.play({ media: 'sound:vm-next' }, playback, err => {});
+
+                    channel.play({ media: 'sound:vm-next' }, playback, err => {
+                        if (err) debug('channel.play error:', err);
+                    });
                 });
 
-                channel.play({ media: 'sound:vm-leavemsg' }, playback, err => {});
+                channel.play({ media: 'sound:vm-leavemsg' }, playback, err => {
+                    if (err) debug('channel.play error:', err);
+                });
             });
         },
     );

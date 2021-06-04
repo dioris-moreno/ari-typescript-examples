@@ -20,12 +20,19 @@ Ari.connect(url, username, password, (err, client) => {
     let currentBridgeState = 'NOT_INUSE';
 
     bridge.create({ type: 'mixing' }, (err, instance) => {
+        if (err) return debug('bridge.create error:', err);
+
+        debug('bridge.create instance:', instance);
+
         // Mark this bridge as available
         const opts = {
             deviceName: util.format('Stasis:%s', BRIDGE_STATE),
             deviceState: 'NOT_INUSE',
         };
-        client.deviceStates.update(opts, err => {});
+
+        client.deviceStates.update(opts, err => {
+            if (err) return debug('client.deviceStates.update error:', err);
+        });
     });
 
     client.on('ChannelEnteredBridge', (event, objects) => {
@@ -35,7 +42,11 @@ Ari.connect(url, username, password, (err, client) => {
                 deviceName: util.format('Stasis:%s', BRIDGE_STATE),
                 deviceState: 'BUSY',
             };
-            client.deviceStates.update(opts, err => {});
+
+            client.deviceStates.update(opts, err => {
+                if (err) return debug('client.deviceStates.update error:', err);
+            });
+
             currentBridgeState = 'BUSY';
         }
     });
@@ -47,14 +58,22 @@ Ari.connect(url, username, password, (err, client) => {
                 deviceName: util.format('Stasis:%s', BRIDGE_STATE),
                 deviceState: 'NOT_INUSE',
             };
-            client.deviceStates.update(opts, err => {});
+
+            client.deviceStates.update(opts, err => {
+                if (err) return debug('client.deviceStates.update error:', err);
+            });
+
             currentBridgeState = 'NOT_INUSE';
         }
     });
 
     client.on('StasisStart', (event, incoming) => {
         incoming.answer(err => {
-            bridge.addChannel({ channel: incoming.id }, err => {});
+            if (err) return debug('StasisStart incoming.answer error:', err);
+
+            bridge.addChannel({ channel: incoming.id }, err => {
+                if (err) return debug('StasisStart bridge.addChannel error:', err);
+            });
         });
     });
 

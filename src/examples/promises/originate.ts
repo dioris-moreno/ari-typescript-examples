@@ -21,19 +21,31 @@ export default async () => {
 
         const originate = async (incoming: Channel) => {
             incoming.once('StasisEnd', async (event, channel) => {
+                debug('incoming.once StasisEnd event:', event);
+                debug('incoming.once StasisEnd channel:', channel);
+
                 await outgoing.hangup();
             });
 
             const outgoing = client.Channel();
 
             outgoing.once('ChannelDestroyed', async (event, channel) => {
+                debug('outgoing.once ChannelDestroyed event:', event);
+                debug('outgoing.once ChannelDestroyed channel:', channel);
+
                 await incoming.hangup();
             });
 
             outgoing.once('StasisStart', async (event, outgoing) => {
+                debug('outgoing.once StasisStart event:', event);
+                debug('outgoing.once StasisStart outgoing:', outgoing);
+
                 const bridge = client.Bridge();
 
                 outgoing.once('StasisEnd', async (event, channel) => {
+                    debug('outgoing.once StasisEnd event:', event);
+                    debug('outgoing.once StasisEnd channel:', channel);
+
                     await bridge.destroy();
                 });
 

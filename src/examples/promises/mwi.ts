@@ -1,4 +1,5 @@
-import Ari, { Channel } from 'ari-client';
+/* eslint-disable no-case-declarations */
+import Ari from 'ari-client';
 import util = require('util');
 import { url, username, password } from '../../config';
 import Debug from 'debug';
@@ -25,8 +26,14 @@ export default async () => {
                         const message = client.LiveRecording();
 
                         message.once('RecordingFinished', async (event, newRecording) => {
+                            debug('message.once RecordingFinished event:', event);
+                            debug('message.once RecordingFinished newRecording:', newRecording);
+
                             const playback = client.Playback();
                             playback.once('PlaybackFinished', async (event, newPlayback) => {
+                                debug('playback.once PlaybackFinished event:', event);
+                                debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                                 // Update MWI
                                 messages += 1;
                                 const opts = {
@@ -60,6 +67,9 @@ export default async () => {
                         if (!lastMessage) return channel.play({ media: 'sound:vm-nomore' }, playback);
 
                         playback.once('PlaybackFinished', async (event, newPlayback) => {
+                            debug('playback.once PlaybackFinished event:', event);
+                            debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                             await lastMessage.deleteStored();
 
                             // Remove MWI
@@ -89,6 +99,10 @@ export default async () => {
             let playback = client.Playback();
 
             playback.once('PlaybackFinished', async (err, newPlayback) => {
+                if (err) return debug('playback.once PlaybackFinished error:', err);
+
+                debug('playback.once PlaybackFinished newPlayback:', newPlayback);
+
                 playback = client.Playback();
                 await channel.play({ media: 'sound:vm-next' }, playback);
             });

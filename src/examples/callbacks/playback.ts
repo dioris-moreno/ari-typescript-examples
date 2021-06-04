@@ -15,6 +15,8 @@ Ari.connect(url, username, password, (err, client) => {
     // Use once to start the application
     client.once('StasisStart', (event, incoming) => {
         incoming.answer(err => {
+            if (err) return debug('incoming.answer error:', err);
+
             const playback = client.Playback();
 
             // Play demo greeting and register dtmf event listeners
@@ -26,27 +28,30 @@ Ari.connect(url, username, password, (err, client) => {
 
     const registerDtmfListeners = (err: Error, playback: Playback, incoming: Channel) => {
         incoming.on('ChannelDtmfReceived', (event, channel) => {
+            debug('incoming.on ChannelDtmfReceived channel:', channel);
+
             const digit = event.digit;
 
             switch (digit) {
                 case '5':
-                    playback.control({ operation: 'pause' }, err => {});
+                    playback.control({ operation: 'pause' }, err => debug('playback.control pause error:', err));
                     break;
                 case '8':
-                    playback.control({ operation: 'unpause' }, err => {});
+                    playback.control({ operation: 'unpause' }, err => debug('playback.control unpause error:', err));
                     break;
                 case '4':
-                    playback.control({ operation: 'reverse' }, err => {});
+                    playback.control({ operation: 'reverse' }, err => debug('playback.control reverse error:', err));
                     break;
                 case '6':
-                    playback.control({ operation: 'forward' }, err => {});
+                    playback.control({ operation: 'forward' }, err => debug('playback.control forward error:', err));
                     break;
                 case '2':
-                    playback.control({ operation: 'restart' }, err => {});
+                    playback.control({ operation: 'restart' }, err => debug('playback.control restart error:', err));
                     break;
                 case '#':
-                    playback.control({ operation: 'stop' }, err => {});
+                    playback.control({ operation: 'stop' }, err => debug('playback.control stop error:', err));
                     incoming.hangup(err => {
+                        debug('incoming.hangup error:', err);
                         process.exit(0);
                     });
                     break;
