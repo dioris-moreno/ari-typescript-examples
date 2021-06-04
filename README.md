@@ -48,7 +48,7 @@ TypeScript version of the same examples, but using promises and async/await synt
 You can run any of these examples by executing the command:
 
 ```sh
-npm run dev example-file [promises/callbacks]
+yarn run dev example-file [promises/callbacks]
 ```
 
 Just replace "example-file" with the name of the example file you want to run (bridge, mwi, etc.), followed by the corresponding
@@ -56,13 +56,13 @@ version (promises or callbacks). By default promises versions are run.
 If you want to run the callbacks version of the bridge example, execute:
 
 ```sh
-npm run dev bridge callbacks
+yarn run dev bridge callbacks
 ```
 
 If you want to run the promises version of the originate example, execute:
 
 ```sh
-npm run dev originate
+yarn run dev originate
 ```
 
 ### Debugging
@@ -106,7 +106,7 @@ Ari.connect(url, username, password, (err, client) => {
 You can also run a series of tests against the Asterisk instance defined in .env file as follows:
 
 ```sh
-npm run test
+yarn run test
 ```
 
 #### IMPORTANT: Do not run these tests against a production Asterisk box.
